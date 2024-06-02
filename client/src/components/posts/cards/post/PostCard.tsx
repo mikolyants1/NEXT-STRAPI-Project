@@ -26,7 +26,7 @@ function PostCard({idx,id,attributes,openModal}:IProps):JSX.Element {
 
   return (
     <div className={styles.card}
-     style={{animationDelay:`${idx * 0.3}`}}>
+     style={{animationDelay:`${idx * 0.3}s`}}>
       <div className={styles.main}>
          {attributes.text}
       </div>

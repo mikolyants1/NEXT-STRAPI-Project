@@ -32,8 +32,7 @@ function ModalCard({close,post}:IProps):JSX.Element {
   }
 
   return (
-    <div className={`fixed w-[100%] top-0 h-[100%] z-100 bg-[rgb(10,10,10,0.5)]`}
-     onClick={close}>
+    <div className={`fixed w-[100%] top-0 h-[100%] z-100 bg-[rgb(10,10,10,0.5)]`}>
       <div className={styles.modal}>
         <div className={styles.close}>
           <div className="rotate-[45deg] text-white text-3xl"
