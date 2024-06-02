@@ -1,0 +1,22 @@
+.modal {
+  background-color: rgb(146, 145, 145);
+  width: 300px;
+  height: 160px;
+  margin:200px auto;
+  right: 0;
+  left: 0;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  z-index: 200;
+  box-shadow: 1px 3px 3px 0px black;
+}
+
+.close {
+    display: flex;
+    justify-content: end;
+    width: 80%;
+}
