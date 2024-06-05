@@ -13,12 +13,12 @@ interface IProps {
 }
 
 function PostMapContainer({strapiUser,posts}:IProps):JSX.Element {
-  const [post,setPost] = useState<IStrapiData<IPostAttrs>>({} as IStrapiData<IPostAttrs>);
+  const [modalPost,setModalPost] = useState<IStrapiData<IPostAttrs>>({} as IStrapiData<IPostAttrs>);
   const [mutPosts,setMutPosts] = useState<IStrapiData<IPostAttrs>[] | null>(posts);
   const [open,setOpen] = useState<boolean>(false);
 
   const openModal = (p:IStrapiData<IPostAttrs>):void => {
-    setPost(p);
+    setModalPost(p);
     setOpen(true);
   }
 
@@ -28,7 +28,7 @@ function PostMapContainer({strapiUser,posts}:IProps):JSX.Element {
        {open && (
          <ModalCard
           close={() => setOpen(false)}
-          post={post}
+          post={modalPost}
         />
        )}
       <CreateCard />

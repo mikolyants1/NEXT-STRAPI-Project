@@ -6,11 +6,13 @@ import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver} from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { FormField } from './form/FormField';
-import { authLogin } from '@/actions/authLogin';
-import { IAuthRes } from '@/lib/type';
 import Link from 'next/link';
 import Button from '../ui/Button';
 import LoginAnalogCard from './login/LoginAnalogCard';
+import { authLogin } from '@/actions/authLogin';
+import { authRegister } from '@/actions/authRegister';
+import { useRouter } from 'next/navigation';
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 interface IProps {
   isLogin:boolean
@@ -18,6 +20,7 @@ interface IProps {
 
 function AuthCard({isLogin}:IProps):JSX.Element {
   const [error,setError] = useState<string>("");
+  const router:AppRouterInstance = useRouter();
   const form = useForm<z.infer<typeof AuthSchema>>({
     defaultValues:{
       username:"",
@@ -26,12 +29,18 @@ function AuthCard({isLogin}:IProps):JSX.Element {
     resolver:zodResolver(AuthSchema)
   });
 
-  const submit:SubmitHandler<z.infer<typeof AuthSchema>> = async (values) => {
-    console.log(values)
-    const result:IAuthRes = await authLogin({
-      values,isLogin
-    });
-    if (result.error) setError(result.error);
+  const submit:SubmitHandler<z.infer<
+    typeof AuthSchema
+  >> = async (values) => {
+     if (isLogin){
+      await authLogin(values);
+     } else {
+      const res = await authRegister(values);
+      if (res.success_regist){
+        router.push("/");
+      }
+      if (res.error) setError(res.error);
+    }
   }
 
   return (

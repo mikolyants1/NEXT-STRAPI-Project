@@ -36,11 +36,17 @@ export interface IStrapiResponse<T,N> {
       IStrapiData<T>
     ] : IStrapiData<T>
 }
-export interface IAuthRes {
-  success:boolean,
+
+export type TAuth = "login" | "regist";
+
+export type TAuthRes<T extends TAuth> = {
   error:string,
   user:Omit<User,"password"> | null
-}
+} & ( T extends "login" ? {
+  success_login:boolean
+} : {
+  success_regist:boolean
+})
 
 export type Axios<T,N> = AxiosResponse<IStrapiResponse<T,N>>;
 
